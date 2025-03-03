@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mynotes/Components/appbar.dart';
+
 class NoteEditor extends StatefulWidget {
   const NoteEditor({super.key});
   @override
@@ -8,37 +8,43 @@ class NoteEditor extends StatefulWidget {
 }
 
 class _NoteEditorState extends State<NoteEditor> {
+  AppBars bar = AppBars();
   @override
-  AppBars bar = new AppBars();
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: bar.NoteEditorBar(),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 10,top: 20, right: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
-              style: TextStyle(fontSize: 40),
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Title",
-                  hintStyle: TextStyle(
-                    color: Colors.grey[500],
-                  )),
-            ),
-            Text("12 feb 2024 | 0characters"),
-            TextField(
-              style: TextStyle(fontSize: 20),
-              maxLines: null,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Start typing here....",
-                  hintStyle: TextStyle(
-                    color: Colors.grey[500],
-                  )),
-            ),
-          ],
+      body: Expanded(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10, top: 20, right: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                style: TextStyle(fontSize: 40),
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: "Title",
+                    hintStyle: TextStyle(
+                      color: Colors.grey[500],
+                    )),
+              ),
+              Text("12 Feb 2024 | 0 characters"),
+              Expanded(
+                // Ensures TextField takes available space without overflow
+                child: TextField(
+                  style: TextStyle(fontSize: 20),
+                  maxLines: null,
+                  expands: true, // Allows it to fill available space
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Start typing here....",
+                      hintStyle: TextStyle(
+                        color: Colors.grey[500],
+                      )),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:mynotes/Models/structure.dart';
+import 'package:mynotes/Models/data.dart';
 import 'package:mynotes/Pages/note_editor.dart';
 import 'package:mynotes/Pages/notes.dart';
 import 'package:mynotes/theme/theme.dart';
-import 'package:hive/hive.dart';
 
-
-
-void main() async{
+void main() async {
   //Getting Data from Hive
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(NoteAdapter());
-  await Hive.openBox<Note>('notes');
+  Hive.registerAdapter(mynoteAdapter());
+  await Hive.openBox<mynote>('mynotes');
   runApp(const MyApp());
 }
 
@@ -28,7 +24,6 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.light,
-
       home: const MyHomePage(),
     );
   }
@@ -41,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final pages = [NotePage(),NoteEditor()];
+  final pages = [NotePage(), NoteEditor()];
   @override
   Widget build(BuildContext context) {
     return SafeArea(

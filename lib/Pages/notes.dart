@@ -11,20 +11,17 @@ class NotePage extends StatefulWidget {
 }
 
 class _NotePageState extends State<NotePage> {
-  AppBars bar = AppBars();
-  navbars b_bar = navbars();
+  BuildNotes notes = BuildNotes();
 
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  void addNote() async {
+    await notes.addnote();
+    setState(() {});
   }
 
+  AppBars bar = AppBars();
+  navbars bBar = navbars();
   @override
   Widget build(BuildContext context) {
-    BuildNotes notes = BuildNotes();
     return Scaffold(
       appBar: bar.MenuBar(),
       body: Column(
@@ -72,12 +69,12 @@ class _NotePageState extends State<NotePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: addNote,
         shape: CircleBorder(),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: b_bar.MenuBar(),
+      bottomNavigationBar: bBar.MenuBar(),
     );
   }
 }
